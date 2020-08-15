@@ -1,0 +1,8 @@
+<div>
+    <div class="form-group">
+        <label for="surveyName">{{tagList._SURVEY_NAME}}</label>
+        <input type="text" class="form-control" id="surveyName" [(ngModel)]="surveyName" maxlength="32">
+    </div>
+    <button class="btn btn-dark" (click)="removeSurvey()">{{tagList._REMOVE}}</button>
+    <h3 *ngIf="warning">{{warningText}}</h3>
+</div>

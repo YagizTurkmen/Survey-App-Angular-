@@ -1,0 +1,38 @@
+<h1>{{tagList._SURVEYS}} : {{numberOfSurveys}}
+    <select [(ngModel)]="selectedLang" (change)="getLanguage()" style="position: absolute; right: 1rem;">
+        <option value="EN" selected="selected">EN</option>
+        <option value="TR">TR</option>
+    </select>
+</h1>
+<div class="row justify-content-md-center p-3 vertical-center wrapper">
+    <div class="col-lg-6 col-sm-12 border overflow-auto"
+        style="background-color: #bbe1fa; border-color: #1b262c !important; border-width: .5rem !important; border-radius: .25rem;">
+        <h3>{{tagList._SURVEYS}}</h3>
+        <hr>
+        <ul class="list-group h-75 p-3">
+            <div class="border-card" *ngFor="let survey of surveys">
+                <div class="content-wrapper">
+                    <div class="label-group">
+                        <h4 class="title">{{survey.Name}}</h4>
+                    </div>
+                </div>
+                <i (click)="openUpdater(survey)" class="fa fa-pencil-square fa-2x fontAbtn" style="margin-right: .5rem;"></i>
+                <i (click)="openRemover(survey)" class="fa fa-trash-o fa-2x fontAbtn"></i>
+            </div>
+        </ul>
+        <a><i (click)="openCreator()" class="fa fa-plus-square fa-3x fontAbtn"></i></a>
+    </div>
+    <div class="col-lg-6 col-sm-12 border"
+        style="background-color: #3282b8; border-color: #1b262c !important; border-width: .5rem !important; border-radius: .25rem;">
+        <h2 *ngIf="operationSelector == 1">{{tagList._CREATE}}</h2>
+        <h2 *ngIf="operationSelector == 2">{{tagList._UPDATE}}</h2>
+        <h2 *ngIf="operationSelector == 3">{{tagList._REMOVE}}</h2>
+        <hr class="operation" *ngIf="operationSelector != 0">
+        <app-creator *ngIf="operationSelector == 1" [survey]="survey" [tagList]="tagList" [surveys]="surveys"
+            (created)="onCreated($event)" style="padding: 1rem;"></app-creator>
+        <app-updater *ngIf="operationSelector == 2" [survey]="survey" [tagList]="tagList" [surveys]="surveys"
+            (updated)="onUpdated($event)" style="padding: 1rem;"></app-updater>
+        <app-remover *ngIf="operationSelector == 3" [survey]="survey" [tagList]="tagList" [surveys]="surveys"
+            (removed)="onRemoved($event)" style="padding: 1rem;"></app-remover>
+    </div>
+</div>
